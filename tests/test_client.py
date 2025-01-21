@@ -258,12 +258,12 @@ async def test_client_reprs():
 async def test_cluster_widget():
     pytest.importorskip("ipywidgets")
 
-    def test():
+    async def test():
         with GatewayCluster(
             address=g.address, proxy_address=g.proxy_address
         ) as cluster:
             # Smoke test widget
-            cluster._widget()
+            await cluster._widget()
 
             template = "<tr><th>Workers</th> <td>%d</td></tr>"
             assert (template % 0) in cluster._widget_status()
