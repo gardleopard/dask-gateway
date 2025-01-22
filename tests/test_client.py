@@ -311,19 +311,19 @@ async def test_dashboard_link_from_public_address():
 
 async def test_create_cluster_with_GatewayCluster_constructor():
     async with temp_gateway() as g:
-        cluster =  await GatewayCluster(
+        async with GatewayCluster(
             address=g.address, proxy_address=g.proxy_address, asynchronous=True
-        )
-        # Cluster is now present in list
-        clusters = await cluster.gateway.list_clusters()
-        assert len(clusters)
-        assert clusters[0].name == cluster.name
+        ) as cluster:
+            # Cluster is now present in list
+            clusters = await cluster.gateway.list_clusters()
+            assert len(clusters)
+            assert clusters[0].name == cluster.name
 
-        await cluster.scale(1)
+            await cluster.scale(1)
 
-        async with cluster.get_client(set_as_default=False) as client:
-            res = await client.submit(lambda x: x + 1, 1)
-            assert res == 2
+            async with cluster.get_client(set_as_default=False) as client:
+                res = await client.submit(lambda x: x + 1, 1)
+                assert res == 2
 
         assert cluster.status == "closed"
 
