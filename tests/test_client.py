@@ -263,7 +263,7 @@ async def test_cluster_widget():
             address=g.address, proxy_address=g.proxy_address
         ) as cluster:
             # Smoke test widget
-            await cluster._widget()
+            cluster._widget()
 
             template = "<tr><th>Workers</th> <td>%d</td></tr>"
             assert (template % 0) in cluster._widget_status()
