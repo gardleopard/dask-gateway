@@ -258,7 +258,7 @@ async def test_client_reprs():
 async def test_cluster_widget():
     pytest.importorskip("ipywidgets")
 
-    async def test():
+    def test():
         with GatewayCluster(
             address=g.address, proxy_address=g.proxy_address
         ) as cluster:
