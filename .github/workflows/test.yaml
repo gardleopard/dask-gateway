@@ -316,7 +316,7 @@ jobs:
 
       - name: Install traefik
         run: |
-          helm add repo traefik https://helm.traefik.io/traefik ;
+          helm repo add traefik https://helm.traefik.io/traefik ;
           helm install traefik traefik/traefik \
               --namespace traefik \
               --create-namespace \
