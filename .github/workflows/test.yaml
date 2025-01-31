@@ -327,7 +327,6 @@ jobs:
           helm install \
               test-dask-gateway \
               resources/helm/dask-gateway \
-              --install \
               --values=resources/helm/testing/chart-install-values.yaml \
               --set traefik.installTraefik=false \
               --set gateway.backend.namespace=default \
